@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Final Output</title>
+    <meta name="description" content="Bootstrap.">
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<h1 class="display-4 text-center mt-2">Buildings</h1>
+
+
+
+    <table id="myTable" class="table">
+        <thead>
+        <tr>
+            <th scope="col" data-field="ID" data-sortable="true">ID</th>
+            <th scope="col" data-field="Name" data-sortable="true">Name</th>
+            <th scope="col" data-field="Type" data-sortable="true">Type</th>
+            <th scope="col" data-field="Postcode" data-sortable="true">Postcode</th>
+            <th scope="col" data-field="City" data-sortable="true">City</th>
+            <th scope="col" data-field="Size" data-sortable="true">Size m2</th>
+            <th scope="col" data-field="maxOccupants" data-sortable="true">Max Occupants</th>
+            <th scope="col" data-field="v" data-sortable="true">v</th>
+            <th scope="col" data-field="edit">Edit</th>
+            <th scope="col" data-field="delete">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php for ($i = 0; $i < count($data); $i++) { ?>
+            <tr id="tr-id-2" class="tr-class-2">
+                <td><?php echo $data[$i]['_id'] ?></td>
+                <td><?php echo $data[$i]['name'] ?></td>
+                <td><?php echo $data[$i]['type'] ?></td>
+                <td><?php echo $data[$i]['postcode'] ?></td>
+                <td><?php echo $data[$i]['city'] ?></td>
+                <td><?php echo $data[$i]['size_m2'] ?></td>
+                <td><?php echo $data[$i]['maxOccupants'] ?></td>
+                <td><?php echo $data[$i]['__v'] ?></td>
+                <td></td>
+                <td></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#myTable').dataTable();
+    });
+</script>
+</html>

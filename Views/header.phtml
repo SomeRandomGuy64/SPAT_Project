@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <title></title>
+    <!-- css -->
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <!-- javascript -->
+    <script type="text/javascript" src="../JS/javascript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../img/icon.png"/>
+</head>
+</html>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="../index.php"><img src="../img/logo.png"></a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <button class="btn btn-dark ml-3 mr-2" onclick="redirectToBuildings()">Buildings</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-dark mr-2" onclick="redirectToInfrastructure()">Infrastructure</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-dark mr-2" onclick="redirectToDemographics()">Demographics</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-dark mr-2" onclick="redirectToUtilities()">Utilities</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-dark mr-2" onclick="redirectToAllData()">All Data</button>
+            </li>
+        </ul>
+        <!--
+        <form class="form-inline my-2 my-lg-0 mr-3">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        -->
+        <?php
+        if ($loggedIn == false) {
+            ?>
+            <button class="btn btn-dark mr-1" onClick="redirectToLoginPage()">LOGIN</button>
+            <button class="btn btn-dark" onClick="redirectToSignUpPage()">SIGN UP</button>
+            <?php
+        } else  {
+            ?>
+            <button class="btn btn-danger" onclick="redirectToLogout()">Logout</button>
+            <?php
+        }
+        ?>
+    </div>
+</nav>

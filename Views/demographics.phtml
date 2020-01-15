@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <title>Demographics</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Bootstrap.">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="display-4 text-center mt-2">Demographics</h1><br>
+            <button class="btn btn-dark mb-2" onclick="redirectToAddNewDemographics()">Add new demographics</button>
+        </div>
+    </div>
+</div>
+
+<table id="myTable" class="table">
+    <thead>
+    <tr>
+        <th scope="col" data-field="ID" data-sortable="true">ID</th>
+        <th scope="col" data-field="Postcode" data-sortable="true">Postcode</th>
+        <th scope="col" data-field="totalHealthNeeds" data-sortable="true">Total health needs</th>
+        <th scope="col" data-field="totalMobilityNeeds" data-sortable="true">Total mobility needs</th>
+        <th scope="col" data-field="totalElderly" data-sortable="true">Total elderly</th>
+        <th scope="col" data-field="totalPopulation" data-sortable="true">Total population</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    for ($i = 0; $i < count($demographicsData); $i++) {
+        ?>
+        <tr id="tr-id-2" class="tr-class-2">
+            <td><?php echo $demographicsData[$i]['_id'] ?></td>
+            <td><?php echo $demographicsData[$i]['postcode'] ?></td>
+            <td><?php echo $demographicsData[$i]['totalHealthNeeds'] ?></td>
+            <td><?php echo $demographicsData[$i]['totalMobilityNeeds'] ?></td>
+            <td><?php echo $demographicsData[$i]['totalElderly'] ?></td>
+            <td><?php echo $demographicsData[$i]['totalPopulation'] ?></td>
+            <td><a href="../Controllers/deleteItem.php?demographicId=<?php echo $demographicsData[$i]['_id']?>"><img src="../img/delete.png" height="20px" width="20px" alt=""></a></td>
+        </tr>
+        <?php
+    }
+    ?>
+    </tbody>
+</table>
+
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').dataTable();
+    });
+</script>
+
+</html>

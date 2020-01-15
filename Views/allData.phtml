@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title>Home Page</title>
+    <!-- css -->
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <!-- javascript -->
+    <script type="text/javascript" src="../JS/javascript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../img/icon.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-3">
+        </div>
+        <div class="col-6 mt-3 text-center">
+            <h1 class="display-4 text-center mt-2">All Data</h1><br>
+            <input type="text" class="form-control" id="myInput" name="">
+        </div>
+        <div class="col mt-3"></div>
+    </div>
+</div>
+
+<div class="row mt-3">
+
+    <div class="col text-center mt-2 mb-2" id="myDIV">
+            <?php for ($i = 0; $i < count($buildingsData); $i++) {?>
+                <ul>
+                    <div class="card text-white bg-dark mb-3">
+                        <p>Buildings
+                        <br><br>ID: <?php echo $buildingsData[$i]['_id']?>
+                        <br>Name: <?php echo $buildingsData[$i]['name']?>
+                        <br>Type: <?php echo $buildingsData[$i]['type']?>
+                        <br>Postcode: <?php echo $buildingsData[$i]['postcode']?>
+                        <br>City: <?php echo $buildingsData[$i]['city']?>
+                        <br>Size: <?php echo $buildingsData[$i]['size_m2']?>
+                        <br>Max Occupants: <?php echo $buildingsData[$i]['maxOccupants']?>
+                    </div>
+                </ul>
+            <?php } ?>
+    </div>
+
+    <div class="col text-center  mt-2 mb-2"  id="myDIV">
+            <?php for ($i = 0; $i < count($infrastructureData); $i++) {?>
+                <ul>
+                    <div class="card text-white bg-dark mb-3">
+                        <p>Infrastructure
+                        <br><br>ID: <?php echo $infrastructureData[$i]['_id']?>
+                        <br>Type: <?php echo $infrastructureData[$i]['type']?>
+                        <br>Name: <?php echo $infrastructureData[$i]['name']?>
+                        <br>Classification: <?php echo $infrastructureData[$i]['classification']?>
+                        <br>Postcodes: <?php for ($j = 0; $j < count($infrastructureData[$i]['postcodes']); $j++ ) {
+                                echo "'".$infrastructureData[$i]['postcodes'][$j]."' ";
+                            } ?></p>
+                    </div>
+                </ul>
+            <?php } ?>
+    </div>
+
+    <div class="col text-center mt-2 mb-2" id="myDIV">
+        <?php for ($i = 0; $i < count($demographicsData); $i++) {?>
+            <ul>
+                <div class="card text-white bg-dark mb-3">
+                    <p>Demographics
+                        <br><br>ID: <?php echo $demographicsData[$i]['_id']?>
+                        <br>Postcode: <?php echo $demographicsData[$i]['postcode']?>
+                        <br>Total heath needs: <?php echo $demographicsData[$i]['totalHealthNeeds']?>
+                        <br>Total mobility needs: <?php echo $demographicsData[$i]['totalMobilityNeeds']?>
+                        <br>Total elderly: <?php echo $demographicsData[$i]['totalElderly']?>
+                        <br>Total population: <?php echo $demographicsData[$i]['totalPopulation']?>
+                </div>
+            </ul>
+        <?php } ?>
+    </div>
+
+    <div class="col text-center mt-2 mb-2" id="myDIV">
+        <?php for ($i = 0; $i < count($utilitiesData); $i++) {?>
+            <ul>
+                <div class="card text-white bg-dark mb-3">
+                    <p>Utilities
+                        <br><br>ID: <?php echo $utilitiesData[$i]['_id']?>
+                        <br>Postcode: <?php echo $utilitiesData[$i]['postcode']?>
+                        <br>Name: <?php echo $utilitiesData[$i]['name']?>
+                        <br>Type: <?php echo $utilitiesData[$i]['type']?>
+                        <br>Classification: <?php echo $utilitiesData[$i]['classification']?>
+                        <br>Dependencies: <?php for ($j = 0; $j < count($utilitiesData[$i]['dependencies']); $j++ ) {
+                            echo "".$utilitiesData[$i]['dependencies'][$j]." ";
+                            } ?></p>
+                </div>
+            </ul>
+        <?php } ?>
+    </div>
+</div>
+
+
+
+
+</body>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myDIV *").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+</html>

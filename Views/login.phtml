@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <!-- css -->
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <!-- javascript -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../img/icon.png"/>
+</head>
+
+<script>
+    function redirectToMainPage() {
+        location.replace("../index.php")
+    }
+</script>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-3">
+            <button class="btn btn-dark" onClick="redirectToMainPage()">Back</button>
+        </div>
+        <div class="col-6 mt-3 text-center">
+            <h1>LOGIN</h1>
+        </div>
+        <div class="col mt-3"></div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-3">
+        </div>
+        <div class="col-6 mt-3 text-center">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <input type="email" name="email" class="form-control" placeholder="Email address" required><br>
+                <input type="password" name="password" class="form-control" placeholder="Password" required><br>
+                <input type="submit" name="submit" class="btn btn-dark" value="Login" required>
+            </form>
+            <span>Not registered? <a href="../Controllers/signup.php">Sign up here</a></span>
+        </div>
+        <div class="col mt-3"></div>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

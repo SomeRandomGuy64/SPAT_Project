@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <title>Add new building</title>
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <!-- javascript -->
+    <script type="text/javascript" src="../JS/javascript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../img/icon.png"/>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-3">
+
+        </div>
+        <div class="col-6 mt-3 text-center">
+            <h1>Add new building</h1>
+            <form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <input type="text" class="form-control" name="name" placeholder="Name*" required><br>
+                <input type="text" class="form-control" name="city" placeholder="City*" required><br>
+                <select name="type" class="form-control">
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Public">Public</option>
+                    <option value="Education">Education</option>
+                </select><br>
+                <input type="text" class="form-control" name="postcode" placeholder="Postcode*" required><br>
+                <input type="number" class="form-control" name="value" placeholder="Value (£)*" required><br>
+                <input type="number" class="form-control" name="maxOccupants" placeholder="Max Occupants*" required><br>
+                <input type="number" class="form-control" name="area" placeholder="Area (m²)*" required><br>
+                <input type="submit" class="btn btn-dark" name="submit" value="Submit" required><br>
+            </form>
+        </div>
+        <div class="col mt-3"></div>
+    </div>
+</div>
+</body>
+</html>
