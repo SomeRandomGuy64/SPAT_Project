@@ -37,20 +37,19 @@ span{
     background-color:#fff;
 }
 .elemnt {
-    animation: xfade 16s 8s infinite;
+    animation: xfade 16s 4s infinite;
     background-image: url('../img/slide1.jpg');
 }
 .elemnt1 {
-    animation: xfade 16s 6s infinite;
+    animation: xfade 16s 8s infinite;
     background-image: url('../img/slide2.jpg');
-
 }
 .elemnt2 {
-    animation: xfade 16s 3s infinite;
+    animation: xfade 16s 12s infinite;
     background-image: url('../img/slide3.jpg');
 }
 .elemnt3 {
-    animation: xfade 16s 0s infinite;
+    animation: xfade 16s 16s infinite;
     background-image: url('../img/slide4.jpg');
 
 }
@@ -63,38 +62,5 @@ span{
     }
     92% {
         opacity:0;
-    }
-}
-@keyframes xfade1{
-    17% {
-        opacity:1;
-    }
-    25% {
-        opacity:0;
-    }
-    92% {
-        opacity:0;
-    }
-}
-@keyframes xfade2{
-    17% {
-        opacity:1;
-    }
-    25% {
-        opacity:0;
-    }
-    92% {
-        opacity:0;
-    }
-}
-@keyframes xfade3{
-    17% {
-        opacity:1;
-    }
-    25% {
-        opacity:0;
-    }
-    92% {
-        opacity:1;
     }
 }
