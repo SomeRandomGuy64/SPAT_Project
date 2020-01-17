@@ -18,7 +18,19 @@ if (isset($_POST['submit'])) {
     $value = $_POST['value'];
     $maxOccupants = $_POST['maxOccupants'];
     $area = $_POST['area'];
-    $dataSet->addNewBuilding($name, $city, $type, $postcode, $value, $maxOccupants, $area);
+
+    $url = "http://18.130.150.122/api/v1/buildings";
+    $fields = [
+        'name'      => $name,
+        'city'      => $city,
+        'type'      => $type,
+        'postcode'      => $postcode,
+        'value'      => $value,
+        'maxOccupants'      => $maxOccupants,
+        'size_m2'      => $area
+    ];
+    $dataSet->addNewBuilding($url, $fields);
+    header('location: buildings.php');
 }
 
 require_once ('../Views/header.phtml');

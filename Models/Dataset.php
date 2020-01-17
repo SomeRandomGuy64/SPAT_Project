@@ -4,6 +4,8 @@ ini_set('display_errors',1);
 error_reporting(-1);
 //models (classes) required in this page
 require_once ('Database.php');
+require_once ('POIData.php');
+require_once ('pagination.php');
 //DatSet class created, to get data from the database
 class DataSet {
 
@@ -73,18 +75,7 @@ class DataSet {
         return $data;
     }
 
-    public function addNewBuilding($name, $city, $type, $postcode, $value, $maxOccupants, $area) {
-        $url = "http://18.130.150.122/api/v1/buildings";
-//The data you want to send via POST
-        $fields = [
-            'name'      => $name,
-            'city'      => $city,
-            'type'      => $type,
-            'postcode'      => $postcode,
-            'value'      => $value,
-            'maxOccupants'      => $maxOccupants,
-            'size_m2'      => $area
-        ];
+    public function addNewItem($url, $fields) {
 
 //url-ify the data for the POST
         $fields_string = http_build_query($fields);
@@ -102,77 +93,10 @@ class DataSet {
 
 //execute post
         $result = curl_exec($ch);
-        header('location: buildings.php');
-    }
-
-    public function addNewDemographics($postcode, $totalPopulation, $totalElderly, $totalMobilityNeeds, $totalHealthNeeds) {
-        $url = "http://18.130.150.122/api/v1/demographics";
-//The data you want to send via POST
-        $fields = [
-            'postcode'      => $postcode,
-            'totalPopulation'      => $totalPopulation,
-            'totalElderly'      => $totalElderly,
-            'totalMobilityNeeds'      => $totalMobilityNeeds,
-            'totalHealthNeeds'      => $totalHealthNeeds
-        ];
-
-//url-ify the data for the POST
-        $fields_string = http_build_query($fields);
-
-//open connection
-        $ch = curl_init();
-
-//set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-
-//So that curl_exec returns the contents of the cURL; rather than echoing it
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-
-//execute post
-        $result = curl_exec($ch);
-        header('location: demographics.php');
-    }
-
-    public function addNewInfrastructure($name, $postCodeArray, $type, $classification) {
-        $url = "http://18.130.150.122/api/v1/infrastructure";
-//The data you want to send via POST
-        $fields = [
-            'name'      => $name,
-            'postcodes'      => $postCodeArray,
-            'type'      => $type,
-            'classification'      => $classification
-        ];
-
-//url-ify the data for the POST
-        $fields_string = http_build_query($fields);
-
-//open connection
-        $ch = curl_init();
-
-//set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-
-//So that curl_exec returns the contents of the cURL; rather than echoing it
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-
-//execute post
-        $result = curl_exec($ch);
-        header('location: infrastructure.php');
     }
 
     public function addNewUtilities($name, $postcode, $type, $classification) {
-        $url = "http://18.130.150.122/api/v1/utilities";
-//The data you want to send via POST
-        $fields = [
-            'name'      => $name,
-            'type'      => $type,
-            'postcode'      => $postcode,
-            'classification'      => $classification
-        ];
+
 
 //url-ify the data for the POST
         $fields_string = http_build_query($fields);
@@ -190,7 +114,7 @@ class DataSet {
 
 //execute post
         $result = curl_exec($ch);
-        header('location: utilities.php');
+
     }
 
     public function deleteItem($url) {
@@ -200,5 +124,56 @@ class DataSet {
         $result = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+    }
+
+    public function getCurrentTime() {
+        date_default_timezone_set('Europe/London');
+        $date = date('Y-m-d H:i:s');
+        return $date;
+    }
+
+    public function addNewPOI($title, $location, $description, $image, $timeStamp) {
+        $sqlQuery = "INSERT INTO `pointOfInterest` VALUES (NULL, '" . $title . "', '" . $location . "', '" . $description . "', '" . $image . "', '" . $timeStamp . "')";
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+    }
+
+    public function getAllPOI() {
+        $pagination = new pagination();
+        $offset = $pagination->getOffset();
+        $dataPerPage = $pagination->getDataPerPage();
+        $sqlQuery = "SELECT * FROM pointOfInterest ORDER BY `timeStamp` DESC LIMIT ". $offset . ", " .$dataPerPage;
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $POIDataSet = [];
+        while ($row = $statement->fetch()) {
+            $POIDataSet[] = new POIData($row);
+        }
+        return $POIDataSet;
+    }
+
+    public function getPOIBySearch($keyword) {
+        $pagination = new pagination();
+        $offset = $pagination->getOffset();
+        $dataPerPage = $pagination->getDataPerPage();
+        $sqlQuery = "SELECT * FROM pointOfInterest WHERE `location` LIKE '%".$keyword."%' ORDER BY `timeStamp` DESC LIMIT ". $offset . ", " .$dataPerPage;
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $POIDataSet = [];
+        while ($row = $statement->fetch()) {
+            $POIDataSet[] = new POIData($row);
+        }
+        return $POIDataSet;
+    }
+
+    public function getNoOfPOI() {
+        $sqlQuery = "SELECT count(poi_id) FROM pointOfInterest";
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $numOfPOI = 0;
+        while ($row = $statement->fetch()) {
+            $numOfPOI = $row[0];
+        }
+        return $numOfPOI;
     }
 }

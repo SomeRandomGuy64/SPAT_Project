@@ -8,6 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/w3.css">
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
@@ -22,12 +23,23 @@
         </div>
     </div>
 </div>
-<table id="myTable" class="table">
+<table id="myTable" class="table w3-table-all">
     <thead>
         <tr>
             <th scope="col" data-field="ID" data-sortable="true">ID</th>
             <th scope="col" data-field="Name" data-sortable="true">Name</th>
-            <th scope="col" data-field="Type" data-sortable="true">Type</th>
+            <!--<th scope="col" data-field="Type" data-sortable="true">Type</th>-->
+            <th>
+                <select name="category" id="category" class="form-control">
+                    <option value="">Type</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Public">Public</option>
+                    <option value="Education">Education</option>
+
+                </select>
+            </th>
+            </th>
             <th scope="col" data-field="Postcode" data-sortable="true">Postcode</th>
             <th scope="col" data-field="City" data-sortable="true">City</th>
             <th scope="col" data-field="Size" data-sortable="true">Size m2</th>
@@ -57,6 +69,7 @@
     $(document).ready(function () {
         $('#myTable').dataTable();
     });
+
 </script>
 
 </html>

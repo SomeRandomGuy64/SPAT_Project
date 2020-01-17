@@ -16,7 +16,18 @@ if (isset($_POST['submit'])) {
     $totalElderly = $_POST['totalElderly'];
     $totalMobilityNeeds = $_POST['totalMobilityNeeds'];
     $totalHealthNeeds = $_POST['totalHealthNeeds'];
-    $dataSet->addNewDemographics($postcode, $totalPopulation, $totalElderly, $totalMobilityNeeds, $totalHealthNeeds);
+
+    $url = "http://18.130.150.122/api/v1/demographics";
+//The data you want to send via POST
+    $fields = [
+        'postcode'      => $postcode,
+        'totalPopulation'      => $totalPopulation,
+        'totalElderly'      => $totalElderly,
+        'totalMobilityNeeds'      => $totalMobilityNeeds,
+        'totalHealthNeeds'      => $totalHealthNeeds
+    ];
+    $dataSet->addNewItem($url, $fields);
+    header('location: demographics.php');
 }
 
 require_once ('../Views/header.phtml');

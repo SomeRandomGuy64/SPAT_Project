@@ -16,7 +16,17 @@ if (isset($_POST['submit'])) {
     $postCodeArray = preg_split("/[\s,]+/", $postcodeString);
     $type = $_POST['type'];
     $classification = $_POST['classification'];
-    $dataSet->addNewInfrastructure($name, $postCodeArray, $type, $classification);
+
+    $url = "http://18.130.150.122/api/v1/infrastructure";
+//The data you want to send via POST
+    $fields = [
+        'name'      => $name,
+        'postcodes'      => $postCodeArray,
+        'type'      => $type,
+        'classification'      => $classification
+    ];
+    $dataSet->addNewItem($url, $fields);
+    header('location: infrastructure.php');
 }
 
 require_once ('../Views/header.phtml');

@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <title>Add new Interest</title>
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <!-- javascript -->
+    <script type="text/javascript" src="../JS/javascript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../img/icon.png"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-3">
+
+        </div>
+        <div class="col-6 mt-3 text-center">
+            <h1>Add new Interest</h1>
+            <form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+                <input type="text" class="form-control" name="title" placeholder="Title*" required><br>
+                <input type="text" class="form-control" name="location" placeholder="Location*" required><br>
+                <textarea type="text" class="form-control" name="description" placeholder="Description*" required></textarea><br>
+                <input type="file" name="file"><br><br>
+                <input type="submit" class="btn btn-dark" name="submit" value="Submit" required><br>
+            </form>
+        </div>
+        <div class="col mt-3"></div>
+    </div>
+</div>
+</body>
+</html>

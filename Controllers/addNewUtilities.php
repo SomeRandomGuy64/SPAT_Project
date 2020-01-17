@@ -15,7 +15,18 @@ if (isset($_POST['submit'])) {
     $postcode = $_POST['postcode'];
     $type = $_POST['type'];
     $classification = $_POST['classification'];
-    $dataSet->addNewUtilities($name, $postcode, $type, $classification);
+
+    $url = "http://18.130.150.122/api/v1/utilities";
+//The data you want to send via POST
+    $fields = [
+        'name'      => $name,
+        'type'      => $type,
+        'postcode'      => $postcode,
+        'classification'      => $classification
+    ];
+
+    $dataSet->addNewItem($url, $fields);
+    header('location: utilities.php');
 }
 
 require_once ('../Views/header.phtml');

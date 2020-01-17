@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Buildings</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Bootstrap.">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/w3.css">
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="display-4 text-center mt-2">Point of Interest</h1><br>
+            <button class="btn btn-dark mb-2" onclick="redirectToAddNewPOI()">Add new Interest</button>
+            <br>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8 mt-3">
+            <form class="form-inline" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                <input type="text" class="form-control" name="searchBar" placeholder="Search here" required>
+                <input type="submit" class="btn btn-dark ml-3" name="searchButton" value="Search">
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col mt-3">
+        </div>
+        <div class="col-9 mt-3">
+
+            <?php foreach ($view->POIDataSet as $POIData) {
+                echo '<div class="card text-white bg-dark mb-3">
+                    <div class="card-header">'.$POIData->getTitle().'</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Location: '.$POIData->getLocation().'</h5>
+                        <p>Description: '.$POIData->getDescription().'</p>
+                        '.$POIData->checkPhoto().'
+                        <p>Uploaded at: '.$POIData->getTimeStamp().'</p>
+                    </div>
+                </div>';
+            } ?>
+                <ul class="pagination text-center">
+                    <?php
+                    for ($i = 1; $i <= $pagination->getNoOfPages(); $i++) {
+                        if ($i == $pagination->getCurrentPageNo()) {
+                            ?>
+                            <li class="page-item"><a class="page-link active"><?php echo $i ?></a></li>
+                        <?php } else { ?>
+                            <li class="page-item"><a class="page-link" href="../Controllers/pointOfInterest.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                        <?php }
+                    } ?>
+                </ul>
+
+        </div>
+        <div class="col mt-3"></div>
+    </div>
+</div>
+
+
+
+</body>
+
+<script>
+</script>
+
+</html>

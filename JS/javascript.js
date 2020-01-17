@@ -38,6 +38,18 @@ function redirectToAllData() {
     location.replace("../Controllers/allData.php")
 }
 
+function redirectToPOI() {
+    location.replace("../Controllers/pointOfInterest.php")
+}
+
+function redirectToAddNewPOI() {
+    location.replace("../Controllers/addNewPOI.php")
+}
+
+
+
+
+
 function redirectToLogout() {
     location.replace("../index.php?logout")
 }
