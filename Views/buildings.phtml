@@ -26,30 +26,19 @@
 <table id="myTable" class="table w3-table-all">
     <thead>
         <tr>
-            <th scope="col" data-field="ID" data-sortable="true">ID</th>
-            <th scope="col" data-field="Name" data-sortable="true">Name</th>
-            <!--<th scope="col" data-field="Type" data-sortable="true">Type</th>-->
-            <th>
-                <select name="category" id="category" class="form-control">
-                    <option value="">Type</option>
-                    <option value="Residential">Residential</option>
-                    <option value="Commercial">Commercial</option>
-                    <option value="Public">Public</option>
-                    <option value="Education">Education</option>
-
-                </select>
-            </th>
-            </th>
-            <th scope="col" data-field="Postcode" data-sortable="true">Postcode</th>
-            <th scope="col" data-field="City" data-sortable="true">City</th>
-            <th scope="col" data-field="Size" data-sortable="true">Size m2</th>
-            <th scope="col" data-field="maxOccupants" data-sortable="true">Max Occupants</th>
-            <th scope="col"></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Postcode</th>
+            <th>City</th>
+            <th>Size m2</th>
+            <th>Max Occupants</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
     <?php for ($i = 0; $i < count($buildingsData); $i++) { ?>
-        <tr id="tr-id-2" class="tr-class-2">
+        <tr>
             <td><?php echo $buildingsData[$i]['_id'] ?></td>
             <td><?php echo $buildingsData[$i]['name'] ?></td>
             <td><?php echo $buildingsData[$i]['type'] ?></td>

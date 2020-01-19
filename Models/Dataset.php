@@ -176,4 +176,13 @@ class DataSet {
         }
         return $numOfPOI;
     }
+
+    public function getUtilityById($utilityId) {
+        $url = "http://18.130.150.122/api/v1/utilities/".$utilityId;
+        $json = file_get_contents($url);
+        $json_data = json_decode($json, true);
+        $data = [];
+        $data = $json_data['utility'];
+        return $data;
+    }
 }

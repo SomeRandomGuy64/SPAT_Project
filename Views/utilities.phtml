@@ -48,7 +48,7 @@
             <td><?php echo $utilitiesData[$i]['type'] ?></td>
             <td><?php echo $utilitiesData[$i]['classification'] ?></td>
             <td><?php for ($j = 0; $j < count($utilitiesData[$i]['dependencies']); $j++ ) {
-                    echo "".$utilitiesData[$i]['dependencies'][$j]." ";
+                     echo "".($dataSet->getUtilityById($utilitiesData[$i]['dependencies'][$j])['name'])." ";
                 } ?>
             </td>
             <td><a href="../Controllers/deleteItem.php?utilitiesId=<?php echo $utilitiesData[$i]['_id']?>"><img src="../img/delete.png" height="20px" width="20px" alt=""></a></td>
