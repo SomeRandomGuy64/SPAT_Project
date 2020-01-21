@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         'maxOccupants'      => $maxOccupants,
         'size_m2'      => $area
     ];
-    $dataSet->addNewBuilding($url, $fields);
+    $dataSet->addNewItem($url, $fields);
     header('location: buildings.php');
 }
 
